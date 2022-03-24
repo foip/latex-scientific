@@ -1,0 +1,9 @@
+# LaTeX artifacts
+*.aux
+
+# Everything main but main.tex
+/main*
+!/main.tex
+
+# Minted
+/_minted-*/

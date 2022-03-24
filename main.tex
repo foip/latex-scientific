@@ -1,0 +1,89 @@
+\documentclass{scrbook}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\input{meta/preamble}
+
+
+\begin{document}
+
+\setcounter{secnumdepth}{3}
+
+% ##################################################
+% Startteil
+% ##################################################
+
+% Titelblatt
+\include{meta/title}
+\cleardoubleemptypage
+
+\frontmatter
+\pagenumbering{Roman}
+
+% Abstract
+\include{content/abstract}
+\cleardoubleemptypage
+
+% Inhaltsverzeichnis
+\tableofcontents
+\cleardoubleemptypage
+
+% Abbildungsverzeichnis einbinden
+\listoffigures
+\cleardoubleemptypage
+
+% Tabellenverzeichnis einbinden
+\listoftables
+\cleardoubleemptypage
+
+% Quellcodeverzeichnis einbinden
+\listoflistings
+\cleardoubleemptypage
+
+% Abkürzungsverzeichnis
+\setglossarystyle{long}
+
+\renewcommand*{\arraystretch}{1.5} % 1.5-facher Zeilenabstand
+\printnoidxglossary[type=\acronymtype, title={Abkürzungsverzeichnis}]
+\renewcommand*{\arraystretch}{1.0} % Einfacher Zeilenabstand
+
+% ##################################################
+% Hauptteil
+% ##################################################
+\mainmatter
+
+% Abbildungs- und Tabellennummerierung zurücksetzen
+\setcounter{figure}{0}
+\setcounter{table}{0}
+
+% Kapitel
+\include{content/einleitung}
+
+
+% ##################################################
+% Schlussteil
+% ##################################################
+
+% Schlagwortverzeichnis
+\printindex
+
+% Literaturverzeichnis
+\singlespacing
+\printbibliography[
+	heading = bibintoc,
+]
+
+% Eidesstattliche Erklärung
+\include{meta/affirmation}
+
+
+% Anhang
+\appendix
+\appendixstyle
+
+% Hier Anhang einfügen
+\include{appendix/reports}
+
+
+\end{document}

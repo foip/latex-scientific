@@ -1,0 +1,298 @@
+% ##################################################
+% Dokumentvariablen
+% ##################################################
+
+% Persoenliche Daten
+\newcommand{\docNachname}{Nachname}
+\newcommand{\docVorname}{Vorname}
+\newcommand{\docStrasse}{Straße}
+\newcommand{\docOrt}{Ort}
+\newcommand{\docPlz}{PLZ}
+\newcommand{\docEmail}{Mail}
+\newcommand{\docMatrikelnummer}{Matrikel}
+
+% Dokumentdaten
+\newcommand{\docTitel}{Titel}
+\newcommand{\docUntertitel}{Untertitel}
+\newcommand{\docArtDerArbeit}{Art der Arbeit}
+\newcommand{\docStudiengang}{Studiengang}
+\newcommand{\docAbgabedatum}{Abgabedatum}
+\newcommand{\docErsterReferent}{Erster Referent}
+\newcommand{\docZweiterReferent}{Zweiter Referent}
+
+% ##################################################
+% Allgemeine Pakete
+% ##################################################
+
+% Abbildungen einbinden
+\usepackage{graphicx}
+\usepackage{minipage-marginpar}
+
+% Paket zur Index-Erstellung (Schlagwortverzeichnis)
+\usepackage{imakeidx}
+\makeindex[intoc, title=Schlagwortverzeichnis, columns=1]
+\indexsetup{
+	headers={\indexname}{\indexname}
+}
+
+% Farben
+\usepackage{color}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+
+% Maskierung von URLs und Dateipfaden
+\usepackage[hyphens]{url}
+
+% Deutsche Unterstützung
+\usepackage[ngerman]{babel}
+
+% Mathematische Zeichen etc.
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% ##################################################
+% Seitenformatierung
+% ##################################################
+
+\KOMAoption{paper}{A4}
+\KOMAoption{twoside}{true}
+
+\usepackage[
+	portrait,
+	top = 3cm,
+	bottom = 2cm,
+	inner = 2.5cm,
+	outer = 2.5cm,
+	bindingoffset = 1.5cm,
+]{geometry}
+
+
+% ##################################################
+% Kopf- und Fusszeile
+% ##################################################
+
+\usepackage[singlespacing = true]{scrlayer-scrpage}
+\clearpairofpagestyles
+
+\KOMAoption{headsepline}{true}
+\KOMAoption{plainheadsepline}{true}
+
+\ohead*{\pagemark} % Seitennummer außen
+\ihead*{\leftmark} % Kapitel innen
+
+\setkomafont{pageheadfoot}{\bfseries} % Kopfzeile fett
+\setkomafont{pagination}{\bfseries} % Seitenzahl fett
+
+
+% ##################################################
+% Absätze
+% ##################################################
+
+\KOMAoption{parskip}{half}
+
+% Absätze der Überschriften anpassen
+\RedeclareSectionCommand[afterskip = \baselineskip]{chapter}
+\RedeclareSectionCommand[beforeskip = \baselineskip, afterskip = 1sp]{section}
+\RedeclareSectionCommand[beforeskip = \baselineskip, afterskip = 1sp]{subsection}
+
+% ##################################################
+% Schriften
+% ##################################################
+
+% Erlaubt beliebig große Schrift
+\usepackage{lmodern}
+
+% Schriftgröße
+\KOMAoption{fontsize}{12pt}
+
+% Stdandardschrift festlegen
+\renewcommand*{\familydefault}{\sfdefault}
+
+% Standard Zeilenabstand: 1,5 zeilig
+\usepackage{setspace}
+\onehalfspacing 
+
+% Schriftgroessen festlegen
+\setkomafont{chapter}{\large\bfseries} 
+\setkomafont{section}{\normalsize\bfseries} 
+\setkomafont{subsection}{\normalsize\mdseries} 
+\setkomafont{caption}{\normalsize\mdseries} 
+
+% ##################################################
+% Inhaltsverzeichnis / Allgemeine Verzeichniseinstellungen
+% ##################################################
+
+\KOMAoption{toc}{chapterentrywithdots}
+\KOMAoption{listof}{nochaptergap, entryprefix}
+
+% Einträge für andere Verzeichnisse
+\setuptoc{toc}{totoc}
+\KOMAoption{toc}{listof, index, bibliography}
+
+% Schriftart und -groesse im Inhaltsverzeichnis anpassen
+\setkomafont{chapterentry}{\normalsize}
+
+% Zeilenabstand in den Verzeichnissen einstellen
+\BeforeStartingTOC[toc]{
+	\DeclareTOCStyleEntry[
+		beforeskip=.5\baselineskip
+	]{tocline}{chapter}
+	
+	\DeclareTOCStyleEntry[
+		beforeskip=.5\baselineskip
+	]{tocline}{section}
+	
+	\renewcommand*{\autodot}{}
+}
+
+
+% ##################################################
+% Allgemeine Abbildungs- und Tabellenverzeichnis Optionen
+% ##################################################
+
+% Pakete für Tabellen und Abbildungen
+\usepackage{chngcntr}
+\usepackage{caption}
+\usepackage{subcaption}
+
+% ##################################################
+% Abbildungsverzeichnis und Abbildungen
+% ##################################################
+
+\usepackage{wrapfig}
+
+% Nummerierung von Abbildungen
+\counterwithout{figure}{chapter}
+
+\BeforeStartingTOC[lof]{
+	\DeclareTOCStyleEntry[
+		beforeskip=.5\baselineskip,
+		numwidth=10em
+	]{tocline}{figure}
+	
+	\renewcommand*{\autodot}{:}
+}
+
+
+% ##################################################
+% Tabellenverzeichnis und Tabellen
+% ##################################################
+
+\usepackage{booktabs}
+
+% Nummerierung von Tabellen
+\counterwithout{table}{chapter}
+
+\BeforeStartingTOC[lot]{
+	\DeclareTOCStyleEntry[
+		beforeskip=.5\baselineskip,
+		numwidth=10em
+	]{tocline}{table}
+	
+	\renewcommand*{\autodot}{:}
+}
+
+
+% ##################################################
+% Listings (Quellcode)
+% ##################################################
+
+\usepackage{minted}
+\usepackage[babel, german=quotes]{csquotes}
+\MakeOuterQuote{"}
+
+\renewcommand{\listoflistingscaption}{Quellcodeverzeichnis}
+\renewcommand{\listingscaption}{Quellcode}
+\newcommand{\listingautorefname}{Quellcode}
+
+\renewcommand*{\listoflistings}{\listoftoc[{\listoflistingscaption}]{lol}}
+\setuptoc{lol}{totoc}
+
+\BeforeStartingTOC[lol]{
+	\DeclareTOCStyleEntry[
+		level=1,
+		indent=1.5em,
+		numwidth=10em,
+		beforeskip=.5\baselineskip,
+		entrynumberformat=\listingscaption~,
+	]{tocline}{listing}
+	
+	\renewcommand*{\autodot}{:}
+}
+
+% ##################################################
+% Theoreme
+% ##################################################
+
+% Umgebung für Formeln
+\newtheorem{formel}{Formel}
+\newcommand{\formelautorefname}{Formel}
+  	
+% ##################################################
+% Literaturverzeichnis
+% ##################################################
+
+\usepackage[
+	backend = biber,
+	bibstyle = authoryear,
+	citestyle = authoryear,
+	giveninits = true,
+	uniquename = false,
+	dashed = false,
+]{biblatex}
+
+\DeclareNameAlias{sortname}{family-given}
+
+\DefineBibliographyStrings{ngerman}{
+	bibliography = {{Literaturverzeichnis}},
+	andothers = {{et al.}},
+	mathesis = {{Masterarbeit}},
+}
+
+\addbibresource{meta/literature.bib}
+
+% ##################################################
+% PDF / Dokumenteninterne Links
+% ##################################################
+
+\usepackage[
+	colorlinks=false,
+   	linkcolor=black,
+   	citecolor=black,
+  	filecolor=black,
+	urlcolor=black,
+    bookmarks=true,
+    bookmarksopen=true,
+    bookmarksopenlevel=3,
+    bookmarksnumbered,
+    plainpages=false,
+    pdfpagelabels=true,
+    hyperfootnotes,
+    pdftitle ={\docTitel},
+    pdfauthor={\docVorname \docNachname},
+    pdfcreator={\docVorname \docNachname}
+]{hyperref}
+
+% ##################################################
+% Abkürzungen
+% ##################################################
+
+\usepackage[acronym, nogroupskip, nonumberlist, nopostdot, translate=babel]{glossaries}
+\makenoidxglossaries
+\loadglsentries{meta/glossary}
+
+% Fettgedruckte Abkürzung im Verzeichnis
+\renewcommand*{\glsnamefont}[1]{\textbf{#1}}
+
+
+% ##################################################
+% Anhang
+% ##################################################
+
+\newcommand*{\appendixstyle}{
+	\renewcommand*{\raggedchapter}{\centering}
+	\RedeclareSectionCommand[font=\Huge, beforeskip=0.4\textheight]{chapter}
+	
+	\RedeclareSectionCommand[font=\large, beforeskip=0pt, afterskip=1sp]{section}
+	
+	\RedeclareSectionCommand[font=\bfseries, beforeskip=0pt, afterskip=1sp]{subsection}
+}
